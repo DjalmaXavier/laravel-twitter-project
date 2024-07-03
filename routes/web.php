@@ -26,3 +26,10 @@ Route::get(
     '/profile',
     [ProfileController::class, 'profile']
 );
+
+Route::get(
+    '/terms',
+    function () {
+        return view('terms');
+    }
+);
