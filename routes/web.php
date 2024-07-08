@@ -24,12 +24,17 @@ Route::get(
 )->name('dashboard');
 
 Route::post(
-    '/idea',
+    '/ideas',
     [IdeaController::class, 'store']
-)->name('idea.create');
+)->name('idea.store');
+
+Route::delete(
+    '/ideas/{id}',
+    [IdeaController::class, 'destroy']
+)->name('idea.destroy');
 
 Route::get(
-    '/profile',
+    '/profiles',
     [ProfileController::class, 'profile']
 );
 
