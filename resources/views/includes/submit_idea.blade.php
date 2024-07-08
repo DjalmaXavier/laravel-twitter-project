@@ -1,6 +1,6 @@
 <div class="row">
     <div class="mb-3">
-        <form action="{{ route('idea.create') }}" method="POST">
+        <form action="{{ route('idea.store') }}" method="POST">
             @csrf
             <textarea name="idea-content" class="form-control" id="idea" rows="3"></textarea>
             @error('idea-content')
