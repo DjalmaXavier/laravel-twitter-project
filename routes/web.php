@@ -23,6 +23,11 @@ Route::get(
     [DashboardController::class, 'index']
 )->name('dashboard');
 
+Route::get(
+    '/ideas/{idea}',
+    [IdeaController::class, 'show']
+)->name('idea.show');
+
 Route::post(
     '/ideas',
     [IdeaController::class, 'store']
