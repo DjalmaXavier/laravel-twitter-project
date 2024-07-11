@@ -28,6 +28,16 @@ Route::get(
     [IdeaController::class, 'show']
 )->name('idea.show');
 
+Route::get(
+    '/ideas/{idea}/edit',
+    [IdeaController::class, 'edit']
+)->name('idea.edit');
+
+Route::put(
+    '/ideas/{idea}',
+    [IdeaController::class, 'update']
+)->name('idea.update');
+
 Route::post(
     '/ideas',
     [IdeaController::class, 'store']
