@@ -13,4 +13,9 @@ class Idea extends Model
         'idea',
         'likes'
     ];
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
