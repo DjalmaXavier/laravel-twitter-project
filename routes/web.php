@@ -13,6 +13,7 @@ View: What should be shown to the user (HTML and CSS / Blade files)
 
 */
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\ProfileController;
@@ -42,6 +43,11 @@ Route::post(
     '/ideas',
     [IdeaController::class, 'store']
 )->name('idea.store');
+
+Route::post(
+    '/ideas/{idea}/comments',
+    [CommentController::class, 'store']
+)->name('idea.comments.store');
 
 Route::delete(
     '/ideas/{id}',
