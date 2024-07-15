@@ -20,14 +20,10 @@ class IdeaController extends Controller
         ];
         request()->validate($rules, $message);
 
-        try {
-            Idea::create([
-                'idea' => request()->get('idea-content', '')
-            ]);
-            return redirect()->route("dashboard")->with('sucess', 'Idea created!!');
-        } catch (\Throwable $th) {
-            return redirect()->route("dashboard")->with('error', 'Idea not created!!');
-        }
+
+        $idea =  Idea::create(request()->all()); // We can use the request()->all(), becase we had used $fillable in idea.php
+
+        return redirect()->route("dashboard")->with('sucess', 'Idea created!!');
     }
 
     public function destroy(Idea $id) //Using Route Model Binding, we can reduce or code
