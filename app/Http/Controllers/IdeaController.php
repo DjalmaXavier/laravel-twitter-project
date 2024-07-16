@@ -18,19 +18,19 @@ class IdeaController extends Controller
             'idea-content.min' => "The idea field must be at least 5 characters.",
             'idea-content.max' => "The idea field must not be greater than 240 characters."
         ];
-        request()->validate($rules, $message);
+        $validated = request()->validate($rules, $message);
 
 
-        $idea =  Idea::create(request()->all()); // We can use the request()->all(), becase we had used $fillable in idea.php
+        Idea::create(['idea' => $validated['idea-content']]); //We removed request()->all() because it's better to validate the data and use the validated data for creating records.
 
-        return redirect()->route("dashboard")->with('sucess', 'Idea created!!');
+        return redirect()->route("dashboard")->with('success', 'Idea created!!');
     }
 
     public function destroy(Idea $id) //Using Route Model Binding, we can reduce or code
     {
         $id->delete();
 
-        return redirect()->route("dashboard")->with('sucess', 'Idea deleted!');;
+        return redirect()->route("dashboard")->with('success', 'Idea deleted!');;
     }
 
     public function edit(Idea $idea)
@@ -49,13 +49,11 @@ class IdeaController extends Controller
             'idea-content.min' => "The idea field must be at least 5 characters.",
             'idea-content.max' => "The idea field must not be greater than 240 characters."
         ];
-        request()->validate($rules, $message);
+        $validated = request()->validate($rules, $message);
 
+        $idea->update(['idea' => $validated['idea-content']]);
 
-        $idea->idea = request()->get('idea-content', '');
-        $idea->save();
-        $editing = false;
-        return redirect()->route("idea.show", $idea->id)->with('sucess', "Idea updated!");
+        return redirect()->route("idea.show", $idea->id)->with('success', "Idea updated!");
     }
 
     public function show(Idea $idea)
