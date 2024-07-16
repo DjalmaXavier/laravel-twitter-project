@@ -30,7 +30,7 @@
                             @csrf
                             @method('put')
                             <textarea name="idea-content" class="form-control" id="idea" rows="3">{{ $idea->idea }}</textarea>
-                            @error('content')
+                            @error('idea-content')
                                 <span class="d-block m-2 fs-6 text-danger"> {{ $message }} </span>
                             @enderror
                     </div>
