@@ -7,7 +7,7 @@
         </div>
         <div class="col-6">
             <h4> Share yours ideas </h4>
-            @include('includes.sucess_message')
+            @include('includes.success_message')
             @include('includes.error_message')
             <div class="mt-3">
                 @include('includes.idea_card')
