@@ -13,6 +13,7 @@ View: What should be shown to the user (HTML and CSS / Blade files)
 
 */
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IdeaController;
@@ -53,6 +54,16 @@ Route::delete(
     '/ideas/{id}',
     [IdeaController::class, 'destroy']
 )->name('idea.destroy');
+
+Route::get(
+    '/register',
+    [AuthController::class, 'register']
+)->name('register');
+
+Route::post(
+    '/register',
+    [AuthController::class, 'store']
+);
 
 Route::get(
     '/profiles',
