@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -35,6 +37,38 @@ class AuthController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        redirect()->route('dashboard')->with('success', 'Account created!');
+        return redirect()->route('dashboard')->with('success', 'Account created!');
+    }
+
+    public function login()
+    {
+        return view('auth.login');
+    }
+
+    public function authenticate()
+    {
+        $validated = request()->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if (auth()->attempt($validated)) {
+
+            request()->session()->regenerate();
+
+            return redirect()->route('dashboard')->with('success', "You're logged in!");
+        }
+        return redirect()->route('login')->withErrors([
+            'email' => "No matching email and password"
+        ]);
+    }
+
+    public function logout()
+    {
+        auth()->logout(); //End the auth session of the current user
+        request()->session()->invalidate(); //Invalidate the current session, removing all the data of the server
+        request()->session()->regenerateToken(); // Regen the CSRF token
+
+        return redirect()->route('dashboard')->with('success', 'Logged out successfully');
     }
 }
