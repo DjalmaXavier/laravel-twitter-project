@@ -25,6 +25,7 @@ Route::get(
     [DashboardController::class, 'index']
 )->name('dashboard');
 
+
 Route::get(
     '/ideas/{idea}',
     [IdeaController::class, 'show']
@@ -66,6 +67,21 @@ Route::post(
 );
 
 Route::get(
+    '/login',
+    [AuthController::class, 'login']
+)->name('login');
+
+Route::post(
+    '/login',
+    [AuthController::class, 'authenticate']
+);
+
+Route::post(
+    '/logout',
+    [AuthController::class, 'logout']
+)->name('logout');
+
+Route::get(
     '/profiles',
     [ProfileController::class, 'profile']
 );
@@ -75,4 +91,4 @@ Route::get(
     function () {
         return view('terms');
     }
-);
+)->name('terms');
