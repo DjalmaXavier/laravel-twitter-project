@@ -4,9 +4,10 @@
             <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
                     <img style="width:50px" class="me-2 avatar-sm rounded-circle"
-                        src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario" alt="Mario Avatar">
+                        src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{ $idea->user->name }}"
+                        alt="{{ $idea->user->name }}">
                     <div>
-                        <h5 class="card-title mb-0"><a href="#"> Mario
+                        <h5 class="card-title mb-0"><a href="#"> {{ $idea->user->name }}
                             </a></h5>
                     </div>
                 </div>
@@ -14,11 +15,19 @@
                     <form action="{{ route('idea.destroy', $idea->id) }}" method="POST">
                         @csrf
                         @method('delete')
-                        <a class="mx-2" href="{{ route('idea.edit', $idea->id) }}"> Edit </a>
+                        @auth
+                            @if ($idea->user_id == Auth::user()->id)
+                                {{-- Check if the id_user of the current idea is the same as the auth user --}}
+                                <a class="mx-2" href="{{ route('idea.edit', $idea->id) }}"> Edit </a>
+                            @endif
+                        @endauth
                         <a href="{{ route('idea.show', $idea->id) }}"> View </a>
-                        <button class="ms-1 btn btn-danger btn-sm"> X </button>
+                        @auth
+                            @if ($idea->user_id == Auth::user()->id)
+                                <button class="ms-1 btn btn-danger btn-sm"> X </button>
+                            @endif
+                        @endauth
                     </form>
-
                 </div>
             </div>
         </div>
