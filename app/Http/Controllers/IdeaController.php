@@ -20,8 +20,10 @@ class IdeaController extends Controller
         ];
         $validated = request()->validate($rules, $message);
 
-
-        Idea::create(['idea' => $validated['idea-content']]); //We removed request()->all() because it's better to validate the data and use the validated data for creating records.
+        Idea::create([
+            'idea' => $validated['idea-content'],
+            'user_id' => auth()->id()
+        ]); //We removed request()->all() because it's better to validate the data and use the validated data for creating records.
 
         return redirect()->route("dashboard")->with('success', 'Idea created!!');
     }
