@@ -15,12 +15,18 @@ class Idea extends Model
     */
 
     protected $fillable = [
+        'user_id',
         'idea',
         'likes'
     ];
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class); // A idea can have many comments
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class); //A user can have many ideas
     }
 }
