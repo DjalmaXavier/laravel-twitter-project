@@ -6,8 +6,6 @@
             @include('shared.side-bar')
         </div>
         <div class="col-6">
-
-            <h4> Share yours ideas </h4>
             @include('includes.success_message')
             @include('includes.error_message')
             @include('includes.submit_idea')
