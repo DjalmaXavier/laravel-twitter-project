@@ -20,66 +20,53 @@ use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+
+Route::group([
+    'prefix' => 'ideas',
+    'as' => 'idea.',
+], function () {
+
+    Route::post(
+        '',
+        [IdeaController::class, 'store']
+    )->name('store');
+
+    Route::get(
+        '/{idea}',
+        [IdeaController::class, 'show']
+    )->name('show');
+
+
+    Route::group([
+        'middleware' => ['auth']
+    ], function () {
+        Route::get(
+            '/{idea}/edit',
+            [IdeaController::class, 'edit']
+        )->name('edit');
+
+        Route::put(
+            '/{idea}',
+            [IdeaController::class, 'update']
+        )->name('update');
+
+        Route::delete(
+            '/{id}',
+            [IdeaController::class, 'destroy']
+        )->name('destroy');
+
+        Route::post(
+            '/ideas/{idea}/comments',
+            [CommentController::class, 'store']
+        )->name('comments.store');
+    });
+});
+
 Route::get(
     '/',
     [DashboardController::class, 'index']
 )->name('dashboard');
 
-
-Route::get(
-    '/ideas/{idea}',
-    [IdeaController::class, 'show']
-)->name('idea.show');
-
-Route::get(
-    '/ideas/{idea}/edit',
-    [IdeaController::class, 'edit']
-)->name('idea.edit');
-
-Route::put(
-    '/ideas/{idea}',
-    [IdeaController::class, 'update']
-)->name('idea.update');
-
-Route::post(
-    '/ideas',
-    [IdeaController::class, 'store']
-)->name('idea.store');
-
-Route::post(
-    '/ideas/{idea}/comments',
-    [CommentController::class, 'store']
-)->name('idea.comments.store');
-
-Route::delete(
-    '/ideas/{id}',
-    [IdeaController::class, 'destroy']
-)->name('idea.destroy');
-
-Route::get(
-    '/register',
-    [AuthController::class, 'register']
-)->name('register');
-
-Route::post(
-    '/register',
-    [AuthController::class, 'store']
-);
-
-Route::get(
-    '/login',
-    [AuthController::class, 'login']
-)->name('login');
-
-Route::post(
-    '/login',
-    [AuthController::class, 'authenticate']
-);
-
-Route::post(
-    '/logout',
-    [AuthController::class, 'logout']
-)->name('logout');
 
 Route::get(
     '/profiles',
