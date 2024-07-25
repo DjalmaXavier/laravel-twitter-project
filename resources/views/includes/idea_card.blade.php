@@ -12,16 +12,16 @@
                     </div>
                 </div>
                 <div>
-                    <form action="{{ route('idea.destroy', $idea->id) }}" method="POST">
+                    <form action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
                         @csrf
                         @method('delete')
                         @auth
                             @if ($idea->user_id == Auth::user()->id)
                                 {{-- Check if the id_user of the current idea is the same as the auth user --}}
-                                <a class="mx-2" href="{{ route('idea.edit', $idea->id) }}"> Edit </a>
+                                <a class="mx-2" href="{{ route('ideas.edit', $idea->id) }}"> Edit </a>
                             @endif
                         @endauth
-                        <a href="{{ route('idea.show', $idea->id) }}"> View </a>
+                        <a href="{{ route('ideas.show', $idea->id) }}"> View </a>
                         @auth
                             @if ($idea->user_id == Auth::user()->id)
                                 <button class="ms-1 btn btn-danger btn-sm"> X </button>
@@ -35,7 +35,7 @@
             @if ($editing ?? false)
                 <div class="row">
                     <div class="mb-3">
-                        <form action="{{ route('idea.update', $idea->id) }}" method="POST">
+                        <form action="{{ route('ideas.update', $idea->id) }}" method="POST">
                             @csrf
                             @method('put')
                             <textarea name="idea-content" class="form-control" id="idea" rows="3">{{ $idea->idea }}</textarea>

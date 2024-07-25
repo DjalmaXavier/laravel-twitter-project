@@ -2,7 +2,7 @@
     <h4> Share yours ideas </h4>
     <div class="row">
         <div class="mb-3">
-            <form action="{{ route('idea.store') }}" method="POST">
+            <form action="{{ route('ideas.store') }}" method="POST">
                 @csrf
                 <textarea name="idea-content" class="form-control" id="idea" rows="3"></textarea>
                 @error('idea-content')
