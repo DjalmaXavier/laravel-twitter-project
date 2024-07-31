@@ -10,12 +10,13 @@
             @include('includes.error_message')
             @include('includes.submit_idea')
             <hr>
-            @foreach ($ideas as $idea)
+            @forelse ($ideas as $idea)
                 @include('includes.idea_card')
-            @endforeach
+            @empty
+                <p class="my-4">No Comments Found</p>
+            @endforelse
             <div class="mt-3">
-                {{ $ideas->links() }}
-
+                {{ $ideas->withQueryString()->links() }}
             </div>
         </div>
         <div class="col-3">
