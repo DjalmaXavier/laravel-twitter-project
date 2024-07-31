@@ -28,9 +28,10 @@ class IdeaController extends Controller
         return redirect()->route("dashboard")->with('success', 'Idea created!!');
     }
 
-    public function destroy(Idea $id) //Using Route Model Binding, we can reduce or code
+    public function destroy(Idea $idea) //Using Route Model Binding, we can reduce or code
     {
-        $id->delete();
+
+        $idea->delete();
 
         return redirect()->route("dashboard")->with('success', 'Idea deleted!');;
     }
