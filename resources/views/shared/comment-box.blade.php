@@ -25,8 +25,11 @@
                 alt="{{ $comment->user->name }}">
             <div class="w-100">
                 <div class="d-flex justify-content-between">
-                    <h6 class="">{{ $comment->user->name }}
-                    </h6>
+                    <a href="{{ route('users.show', $comment->user) }}">
+                        <h6 class="">{{ $comment->user->name }}
+                        </h6>
+                    </a>
+
                     <small class="fs-6 fw-light text-muted">Posted in {{ $comment->created_at }} </small>
                 </div>
                 <p class="fs-6 mt-3 fw-light">
