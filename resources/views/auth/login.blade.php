@@ -6,6 +6,7 @@
             <div class="col-12 col-sm-8 col-md-6">
                 <form class="form mt-5" action="{{ route('login') }}" method="post">
                     @csrf
+                    @include('includes.success_message')
                     <h3 class="text-center text-dark">Login</h3>
                     <div class="form-group">
                         <label for="email" class="text-dark">Email:</label><br>
