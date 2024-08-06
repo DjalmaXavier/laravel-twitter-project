@@ -11,10 +11,15 @@
         </form>
     @endauth
 
-    @guest
+    {{-- ]
+    
+    @Guest is used to display something only to the visitors
 
+    @guest
         <h4 class="mt-3">Login to comment!</h4>
-    @endguest
+    @endguest 
+    
+    --}}
 
 
 
