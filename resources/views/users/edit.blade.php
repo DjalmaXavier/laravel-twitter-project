@@ -9,11 +9,11 @@
             @include('includes.success_message')
             @include('includes.error_message')
             <div class="mt-3">
-                @include('shared.user-edit-card', ['editing'])
+                @include('users.shared.user-edit-card', ['editing'])
             </div>
             <hr>
             @forelse ($ideas as $idea)
-                @include('includes.idea_card')
+                @include('ideas.shared.idea_card')
             @empty
                 <p class="my-4">No Comments Found</p>
             @endforelse
