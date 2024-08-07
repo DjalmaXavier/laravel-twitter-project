@@ -79,7 +79,7 @@ class User extends Authenticatable
 
     public function likesReceived()
     {
-        return $this->ideas()->withCount('likes')->get()->sum('likes_count');
+        return $this->ideas()->withCount('likes')->get()->sum('likes_count'); //Search the user in the ideas, get all the likes and sum
     }
 
     public function getImageUrl()
