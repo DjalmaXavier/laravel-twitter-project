@@ -30,6 +30,9 @@ class IdeaController extends Controller
 
     public function destroy(Idea $idea) //Using Route Model Binding, we can reduce or code
     {
+        if(auth()->id() !== $idea->user_id) {
+            abort(404);
+        }
 
         $idea->delete();
 
