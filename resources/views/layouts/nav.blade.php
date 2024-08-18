@@ -21,8 +21,13 @@
                 @endguest
 
                 @auth
+                @if (Auth::user()->is_admin)
+                <li class=" nav-item df">
+                    <a class="{{ Route::is('admin.dashboard') ? 'active' : '' }} nav-link" href={{ route('admin.dashboard') }}>Admin Panel</a>
+                </li>  
+                @endif
                     <li class="nav-item df">
-                        <a class="nav-link" href={{ route('users.show', Auth::user()->id) }}>{{ Auth::user()->name }}</a>
+                        <a class="{{ Route::is('users.show') ? 'active' : '' }} nav-link" href={{ route('users.show', Auth::user()->id) }}>{{ Auth::user()->name }}</a>
                     </li>
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="post">
