@@ -23,6 +23,7 @@ use App\Http\Controllers\IdeaLikeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Models\Comment;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardControler;
 use Illuminate\Support\Facades\Route;
 
 
@@ -62,3 +63,8 @@ Route::get(
         return view('terms');
     }
 )->name('terms');
+
+Route::get(
+    '/admin',
+    [AdminDashboardControler::class, 'index']
+)->name('admin.dashboard')->middleware(['auth', 'isAdmin']);
