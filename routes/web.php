@@ -67,4 +67,4 @@ Route::get(
 Route::get(
     '/admin',
     [AdminDashboardControler::class, 'index']
-)->name('admin.dashboard')->middleware(['auth', 'isAdmin']);
+)->name('admin.dashboard')->middleware('auth', 'can:admin');
