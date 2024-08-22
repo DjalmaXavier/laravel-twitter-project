@@ -11,22 +11,18 @@
                             </a></h5>
                     </div>
                 </div>
-                <div>
-                    <form action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
-                        @csrf
-                        @method('delete')
-                        @auth
-                            @if ($idea->user_id == Auth::user()->id)
-                                {{-- Check if the id_user of the current idea is the same as the auth user --}}
-                                <a class="mx-2" href="{{ route('ideas.edit', $idea->id) }}"> Edit </a>
-                            @endif
-                        @endauth
-                        <a href="{{ route('ideas.show', $idea->id) }}"> View </a>
-                        @auth
-                            @if ($idea->user_id == Auth::user()->id)
+                <div class='d-flex'>
+                    <a href="{{ route('ideas.show', $idea->id) }}"> View </a>
+                    @auth
+                        @can('update', $idea)
+                            <a class="mx-2" href="{{ route('ideas.edit', $idea->id) }}"> Edit </a>
+                            <form action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
+                                @csrf
+                                @method('delete')
                                 <button class="ms-1 btn btn-danger btn-sm"> X </button>
-                            @endif
-                        @endauth
+                            </form>
+                        @endcan
+                    @endauth
                     </form>
                 </div>
             </div>
