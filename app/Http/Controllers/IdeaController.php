@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Idea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class IdeaController extends Controller
 {
@@ -30,9 +31,9 @@ class IdeaController extends Controller
 
     public function destroy(Idea $idea) //Using Route Model Binding, we can reduce or code
     {
-        if(auth()->id() !== $idea->user_id) {
-            abort(404);
-        }
+        //Gate::authorize('idea.delete', $idea); If we are using gate, this is what we should use.
+
+        Gate::authorize('delete', $idea);
 
         $idea->delete();
 
@@ -41,12 +42,15 @@ class IdeaController extends Controller
 
     public function edit(Idea $idea)
     {
+        Gate::authorize('update', $idea);
         $editing = true;
         return view('ideas.show', compact('idea', 'editing'));
     }
 
     public function update(Idea $idea)
     {
+        Gate::authorize('update', $idea);
+
         $rules = [
             'idea-content' => 'required|min:5|max:240',
         ];
