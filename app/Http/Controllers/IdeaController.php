@@ -2,24 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateIdeaRequest;
+use App\Http\Requests\UpdateIdeaRequest;
 use App\Models\Idea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class IdeaController extends Controller
 {
-    public function store()
+    public function store(CreateIdeaRequest $request)
     {
 
-        $rules = [
-            'idea-content' => 'required|min:5|max:240',
-        ];
-        $message = [
-            'idea-content.required' => "The idea field is required.",
-            'idea-content.min' => "The idea field must be at least 5 characters.",
-            'idea-content.max' => "The idea field must not be greater than 240 characters."
-        ];
-        $validated = request()->validate($rules, $message);
+        $validated = $request->validated();
 
         Idea::create([
             'idea' => $validated['idea-content'],
@@ -47,19 +41,12 @@ class IdeaController extends Controller
         return view('ideas.show', compact('idea', 'editing'));
     }
 
-    public function update(Idea $idea)
+    public function update(UpdateIdeaRequest $request, Idea $idea)
     {
         Gate::authorize('update', $idea);
 
-        $rules = [
-            'idea-content' => 'required|min:5|max:240',
-        ];
-        $message = [
-            'idea-content.required' => "The idea field is required.",
-            'idea-content.min' => "The idea field must be at least 5 characters.",
-            'idea-content.max' => "The idea field must not be greater than 240 characters."
-        ];
-        $validated = request()->validate($rules, $message);
+
+        $validated = $request->validated();
 
         $idea->update(['idea' => $validated['idea-content']]);
 
