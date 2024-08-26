@@ -10,7 +10,9 @@ class Idea extends Model
     use HasFactory;
 
 
-    protected $with = ['user', 'comments.user'];
+    protected $with = ['user:id,name,image', 'comments.user:id,name,image'];
+
+    protected $withCount = ['likes'];
 
     /*
     $fillable is the opposite of $guarded. When using $guarded, we specify the attributes that we do not want to be mass assignable. 
