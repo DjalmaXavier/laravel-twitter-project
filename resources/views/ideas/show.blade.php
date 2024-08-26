@@ -1,5 +1,7 @@
 @extends('layouts.layout')
 
+@section('title', $idea->idea)
+
 @section('content')
     <div class="row">
         <div class="col-3">
