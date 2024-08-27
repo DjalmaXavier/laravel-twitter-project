@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\idea;
 use Illuminate\Http\Request;
 
-//Created with artisan make:controller DashboardController
+//Created with php artisan make:controller DashboardController
 
 
 class DashboardController extends Controller
