@@ -43,4 +43,9 @@ class Idea extends Model
     {
         return $this->likes()->where('user_id', $user->id)->exists();
     }
+
+    public function scopeSearch($query, $search = '')
+    {
+        $query->where('idea', 'like', '%' .  $search . '%');
+    }
 }
