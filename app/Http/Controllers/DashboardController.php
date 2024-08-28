@@ -16,7 +16,7 @@ class DashboardController extends Controller
         $ideas = Idea::orderBy('created_at', 'DESC');
 
         if (request()->has('search')) {
-            $ideas = $ideas->where('idea', 'like', '%' .  request()->get('search', '') . '%');
+            $ideas = $ideas->search(request('search', ''));
         }
 
         return view(
